@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  /* Warna dasar di belakang grid */
+  background-color: #e7e7e7; 
+
+  /* Menumpuk dua linear-gradient untuk membuat grid */
+  background-image: 
+    linear-gradient(to right, #c4c5c65d 1px, transparent 1px), 
+    linear-gradient(to bottom, #c4c5c65d 1px, transparent 1px);
+
+  /* Ukuran setiap kotak grid (lebar x tinggi) */
+  background-size: 15px 15px;
+  
+  /* HANYA GUNAKAN SATU DEKLARASI FONT-FAMILY */
+  font-family: 'Manrope', sans-serif; /* Ini akan mencoba Manrope, jika gagal akan memakai font sans-serif standar */
+  
+  color: var(--foreground);
+  position: relative;
+  animation: scrollGrid 20s linear infinite;
+}
+
+/* Keyframes untuk animasi (ini sudah benar) */
+@keyframes scrollGrid {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200px 0px; 
+  }
+}
+
+
+nav {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.151), rgba(0, 0, 0, 0));
+}
+
+
+
+.skill-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.98) 100%);
+  z-index: 1;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+}
+
+.skill-content {
+  position: relative;
+  z-index: 2;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 2px;
+  background: #e5e7eb;
+  margin-top: 12px;
+}
+
+.bg-pattern {
+  background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+  background-size: 20px 20px;
+}

@@ -1,0 +1,16 @@
+import Image from "next/image";
+import Spline from '@splinetool/react-spline/next';
+
+
+export default function Home() {
+  return (
+    <div className="p-52 w-full flex">
+      <div className="w-1/2">
+        <h1 className="text-6xl font-bold mb-10">Driven by Code, Focused on Results</h1>
+        <h2 className="text-2xl text-gray-700">I'm Brillian Maulana Syah, an Indonesian-based Developer who specializes in building (and occasionally designing) exceptional digital experiences. <br />Always searching for learning opportunities</h2>
+      </div>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.19/build/spline-viewer.js"></script>
+<spline-viewer url="https://prod.spline.design/lN3AcBgptCrtSscH/scene.splinecode"></spline-viewer>
+    </div>
+  );
+}
