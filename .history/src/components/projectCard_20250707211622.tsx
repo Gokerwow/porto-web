@@ -1,6 +1,6 @@
 import Image from "next/image"
 // 1. Impor `forwardRef` dan `ForwardedRef` dari React
-import React, { forwardRef } from "react";
+import React, { forwardRef, ForwardedRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
 
