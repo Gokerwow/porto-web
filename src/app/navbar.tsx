@@ -5,6 +5,8 @@ import React from 'react'; // Import React untuk menggunakan React.cloneElement
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { SVGProps } from 'react';
+import { CursorContext } from "@/context/cursorContext";
+import { useContext } from "react";
 
 // --- DEFINISI KOMPONEN IKON SVG ---
 const HomeIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -35,6 +37,23 @@ const IdCardIcon = (props: SVGProps<SVGSVGElement>) => (
 
 // --- KOMPONEN NAVBAR UTAMA ---
 export default function Navbar() {
+    const { setCursorState } = useContext(CursorContext);
+
+    const handleMouseEnter = (e: React.MouseEvent) => {
+        const rect = (e.target as Element).getBoundingClientRect();
+        setCursorState({
+            variant: 'hovering',
+            dimensions: rect
+        })
+    }
+
+    const handleMouseLeave = () => {
+        setCursorState({
+            variant: 'default',
+            dimensions: {}
+        })
+    }
+
     const pathname = usePathname();
 
     // Sekarang kita menyimpan komponen, bukan string
@@ -52,12 +71,12 @@ export default function Navbar() {
                         const isActive = pathname === link.href;
                         return (
                             // 1. Tambahkan `relative` dan `group` pada kontainer utama setiap link
-                            <div key={link.href} className="relative flex flex-col items-center group">
+                            <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key={link.href} className="relative flex flex-col items-center group">
                                 <Link href={link.href}>
                                     {React.cloneElement(link.icon, {
                                         className: `h-12 w-12 p-2 rounded-xl transition-all duration-300 ${isActive
-                                                ? 'bg-[#4d5066] text-yellow-400'
-                                                : 'text-gray-300 hover:bg-[#4d5066] hover:text-white'
+                                            ? 'bg-[#4d5066] text-yellow-400'
+                                            : 'text-gray-300 hover:bg-[#4d5066] hover:text-white'
                                             }`
                                     })}
                                 </Link>

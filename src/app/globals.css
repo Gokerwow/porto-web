@@ -18,6 +18,9 @@
     --foreground: #ededed;
   }
 } */
+*{
+  cursor: none;
+}
 
 body {
     /* Path dimulai dengan '/' yang menunjuk ke root (folder public) */
