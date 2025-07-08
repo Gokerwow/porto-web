@@ -4,6 +4,11 @@ import React, { forwardRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
 
+interface Status {
+    name: string;
+    color: string;
+}
+
 interface ProjectCardProps {
     title: string;
     description: string;
@@ -11,6 +16,7 @@ interface ProjectCardProps {
     tags: string[];
     year: string;
     accent: string;
+    status: Status;
     id: number;
 }
 
@@ -18,8 +24,8 @@ interface ProjectCardProps {
 const ProjectCard = forwardRef<HTMLAnchorElement, ProjectCardProps>(
     (props, ref) => {
         // 3. Pindahkan destructuring props ke dalam sini
-        const { title, description, media, tags, year, accent, id } = props;
-        
+        const { title, description, media, tags, year, accent, id, status } = props;
+
         const x = useMotionValue(0.5)
         const y = useMotionValue(0.5)
 
@@ -61,7 +67,7 @@ const ProjectCard = forwardRef<HTMLAnchorElement, ProjectCardProps>(
                                     autoPlay loop muted playsInline
                                     className="w-full h-full object-cover opacity-90 rounded-t-lg group-hover:opacity-100 transition-opacity duration-200"
                                 >
-                                    <source src={media} type="video/mp4" />
+                                    <source src={`${media}`} type="video/mp4" />
                                 </video>
                             ) : (
                                 <Image
@@ -74,6 +80,9 @@ const ProjectCard = forwardRef<HTMLAnchorElement, ProjectCardProps>(
                             <div className={`absolute w-full object-cover bg-gradient-to-t from-white/80 via-white/30 to-transparent`}></div>
                             <span className={`absolute top-4 right-4 px-3 py-1 bg-white/80 text-gray-800 text-sm font-medium rounded-full shadow-sm backdrop-blur-sm transform-3d translate-z-[25px]`}>
                                 {year}
+                            </span>
+                            <span className={`absolute bottom-4 right-4 px-3 py-1 ${status.color} bg-opacity-80 text-white text-sm font-bold rounded-full shadow-sm backdrop-blur-sm transform-3d translate-z-[25px]`}>
+                                {status.name}
                             </span>
                         </div>
                         {/* Content */}
