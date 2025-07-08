@@ -37,7 +37,7 @@ const Transcity = localFont({
 const Gafiya = localFont({
   src: './assets/fonts/Gafiya-Regular.otf', // Path relatif ke file font
   display: 'swap',
-});
+}); 
 
 const FiraCode = localFont({
   src: './assets/fonts/FiraCode-Regular.ttf',
@@ -62,11 +62,12 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (sessionStorage.getItem("hasLoadedBefore")) {
-      setIsLoading(false);
-    } else {
+    // Cek session storage hanya sekali saat komponen mount
+    // if (sessionStorage.getItem("hasLoadedBefore")) {
+    //   setIsLoading(false);
+    // } else {
+      // Tandai bahwa loading akan terjadi
       setIsLoading(true);
-    }
   }, []);
 
   const handleAnimationComplete = () => {
@@ -117,13 +118,13 @@ export default function Home() {
       </div>
 
       <div className=" w-full flex justify-center items-end h-full">
-        <div className="absolute z-20 left-1/7 top-1/3 ">
+        <div className="absolute z-20 left-1/6 top-1/3 ">
           <h1 onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={`text-8xl p-7 text-right  ${Transcity.className}`}>Brillian <br /> Maulana  Syah</h1>
         </div>
-        <div className="absolute z-20 right-50 top-1/3 ">
+        <div className="absolute z-20 right-80 top-1/3 ">
           <h1 onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={`text-3xl p-7 text-left ${FiraCode.className} text-gray-700 `}>A <span className="text-black font-bold">Developer</span> who loves <br /> discovering new things and <br /> exploring the frontiers of <br /> technology</h1>
         </div>
-        <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ ease: "backOut", type: "tween", duration: 2 }} className="relative w-[700px] h-[900px]"> {/* Saya beri contoh bingkai dengan tinggi dan lebar */}
+        <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ ease: "backOut", type: "tween", duration: 2 }} className="relative w-[800px] h-[1000px]"> {/* Saya beri contoh bingkai dengan tinggi dan lebar */}
           <Image
             src={"/assets/foto_pribadi_3.png"}
             alt={"foto"}

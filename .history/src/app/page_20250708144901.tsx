@@ -62,11 +62,12 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (sessionStorage.getItem("hasLoadedBefore")) {
-      setIsLoading(false);
-    } else {
+    // Cek session storage hanya sekali saat komponen mount
+    // if (sessionStorage.getItem("hasLoadedBefore")) {
+    //   setIsLoading(false);
+    // } else {
+      // Tandai bahwa loading akan terjadi
       setIsLoading(true);
-    }
   }, []);
 
   const handleAnimationComplete = () => {
@@ -120,7 +121,7 @@ export default function Home() {
         <div className="absolute z-20 left-1/7 top-1/3 ">
           <h1 onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={`text-8xl p-7 text-right  ${Transcity.className}`}>Brillian <br /> Maulana  Syah</h1>
         </div>
-        <div className="absolute z-20 right-50 top-1/3 ">
+        <div className="absolute z-20 right-80 top-1/3 ">
           <h1 onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={`text-3xl p-7 text-left ${FiraCode.className} text-gray-700 `}>A <span className="text-black font-bold">Developer</span> who loves <br /> discovering new things and <br /> exploring the frontiers of <br /> technology</h1>
         </div>
         <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ ease: "backOut", type: "tween", duration: 2 }} className="relative w-[700px] h-[900px]"> {/* Saya beri contoh bingkai dengan tinggi dan lebar */}

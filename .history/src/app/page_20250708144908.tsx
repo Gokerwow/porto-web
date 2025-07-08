@@ -62,11 +62,12 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (sessionStorage.getItem("hasLoadedBefore")) {
-      setIsLoading(false);
-    } else {
+    // Cek session storage hanya sekali saat komponen mount
+    // if (sessionStorage.getItem("hasLoadedBefore")) {
+    //   setIsLoading(false);
+    // } else {
+      // Tandai bahwa loading akan terjadi
       setIsLoading(true);
-    }
   }, []);
 
   const handleAnimationComplete = () => {

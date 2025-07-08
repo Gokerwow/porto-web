@@ -66,7 +66,6 @@ export default function Home() {
       setIsLoading(false);
     } else {
       setIsLoading(true);
-    }
   }, []);
 
   const handleAnimationComplete = () => {
