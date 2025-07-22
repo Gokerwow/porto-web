@@ -1,15 +1,9 @@
+
 import Link from 'next/link';
 
 type ProjectPageProps = {
     params: { id: string };
 };
-
-const projects = [
-    { id: 1, title: "EduTask" },
-    { id: 2, title: "NauTure" },
-    { id: 3, title: "Biasly" },
-    { id: 4, title: "Zuno" },
-];
 
 export default function ProjectPage({ params }: ProjectPageProps) {
     return (
@@ -28,10 +22,4 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             </Link>
         </div>
     );
-}
-
-export async function generateStaticParams() {
-    return projects.map((project) => ({
-        id: project.id.toString(),
-    }));
 }
