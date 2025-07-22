@@ -43,9 +43,8 @@ const projects = [
     },
 ];
 
-export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
-    const project = projects.find((p) => p.id.toString() === id);
+export default function ProjectPage({ params }: { params: { id: string } }) {
+    const project = projects.find((p) => p.id.toString() === params.id);
 
     if (!project) {
         return (
