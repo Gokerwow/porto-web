@@ -2,10 +2,29 @@ import Link from "next/link";
 import { projects } from "../data";
 import { ArrowLeft, ExternalLink, Github, Calendar, Clock, Zap, Target, Code2 } from "lucide-react";
 import Image from "next/image";
+import { useContext } from "react";
+import { CursorContext } from "@/context/cursorContext";
 
 export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const project = projects.find((p) => p.id.toString() === id);
+
+    const { setCursorState } = useContext(CursorContext);
+
+    const handleMouseEnter = (e: React.MouseEvent) => {
+        const rect = (e.target as Element).getBoundingClientRect();
+        setCursorState({
+            variant: 'hovering',
+            dimensions: rect
+        });
+    };
+
+    const handleMouseLeave = () => {
+        setCursorState({
+            variant: 'default',
+            dimensions: {} as DOMRect
+        });
+    };
 
     if (!project) {
         return (
@@ -13,8 +32,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                 <div className="text-center">
                     <h1 className="text-3xl font-light text-gray-800 mb-4">Project not found</h1>
                     <p className="text-gray-500 mb-8 font-light">The project you&apos;re looking for doesn&apos;t exist.</p>
-                    <Link 
-                        href="/projects" 
+                    <Link
+                        href="/projects"
                         className="inline-flex items-center text-gray-600 hover:text-gray-800 transition-colors font-medium"
                     >
                         <ArrowLeft className="w-4 h-4 mr-2" />
@@ -32,8 +51,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             {/* Navigation */}
             <div className="border-b border-gray-200 bg-white">
                 <div className="max-w-7xl mx-auto px-6 py-6">
-                    <Link 
-                        href="/projects" 
+                    <Link
+                        href="/projects"
                         className="inline-flex items-center text-gray-500 hover:text-gray-700 transition-colors font-medium"
                     >
                         <ArrowLeft className="w-4 h-4 mr-2" />
@@ -55,17 +74,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                                 <span className="text-gray-400 font-light">•</span>
                                 <span className="text-gray-400 font-light">{project.duration}</span>
                             </div>
-                            
+
                             <h1 className="text-5xl lg:text-6xl font-light text-gray-900 mb-6 leading-tight">
                                 {project.title}
                             </h1>
                             <p className="text-xl text-gray-600 leading-relaxed mb-12 font-light">
                                 {project.description}
                             </p>
-                            
+
                             <div className="flex flex-wrap gap-6">
                                 {project.github && (
-                                    <Link 
+                                    <Link
                                         href={project.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -76,7 +95,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                                     </Link>
                                 )}
                                 {(project.demo || project.liveUrl) && (
-                                    <Link 
+                                    <Link
                                         href={project.demo || project.liveUrl || '#'}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -88,11 +107,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                                 )}
                             </div>
                         </div>
-                        
+
                         <div className="lg:col-span-5">
                             <div className="relative">
                                 {isVideo ? (
-                                    <video 
+                                    <video
                                         className="w-full rounded-lg shadow-2xl"
                                         controls
                                         poster={project.media?.replace('.mp4', '-poster.jpg')}
@@ -101,8 +120,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                                         Your browser does not support the video tag.
                                     </video>
                                 ) : (
-                                    <Image 
-                                        src={project.media} 
+                                    <Image
+                                        src={project.media}
                                         alt={project.title}
                                         className="w-full rounded-lg shadow-2xl"
                                     />
@@ -249,7 +268,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                                     <h3 className="text-xl font-medium text-gray-900 mb-6">Links</h3>
                                     <div className="space-y-4">
                                         {project.github && (
-                                            <Link 
+                                            <Link
                                                 href={project.github}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
@@ -260,7 +279,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                                             </Link>
                                         )}
                                         {(project.demo || project.liveUrl) && (
-                                            <Link 
+                                            <Link
                                                 href={project.demo || project.liveUrl || '#'}
                                                 target="_blank"
                                                 rel="noopener noreferrer"

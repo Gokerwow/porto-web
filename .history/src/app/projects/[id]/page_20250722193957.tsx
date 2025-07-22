@@ -65,7 +65,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                             
                             <div className="flex flex-wrap gap-6">
                                 {project.github && (
-                                    <Link 
+                                    <a 
                                         href={project.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -73,18 +73,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                                     >
                                         <Github className="w-5 h-5 mr-2" />
                                         View Code
-                                    </Link>
+                                    </a>
                                 )}
                                 {(project.demo || project.liveUrl) && (
-                                    <Link 
-                                        href={project.demo || project.liveUrl || '#'}
+                                    <a 
+                                        href={project.demo || project.liveUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center text-gray-700 hover:text-gray-900 transition-colors font-medium"
                                     >
                                         <ExternalLink className="w-5 h-5 mr-2" />
                                         Live Demo
-                                    </Link>
+                                    </a>
                                 )}
                             </div>
                         </div>
@@ -249,7 +249,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                                     <h3 className="text-xl font-medium text-gray-900 mb-6">Links</h3>
                                     <div className="space-y-4">
                                         {project.github && (
-                                            <Link 
+                                            <a 
                                                 href={project.github}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
@@ -257,18 +257,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                                             >
                                                 <Github className="w-5 h-5 mr-3" />
                                                 Source Code
-                                            </Link>
+                                            </a>
                                         )}
                                         {(project.demo || project.liveUrl) && (
-                                            <Link 
-                                                href={project.demo || project.liveUrl || '#'}
+                                            <a 
+                                                href={project.demo || project.liveUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="flex items-center text-gray-600 hover:text-gray-800 transition-colors font-light"
                                             >
                                                 <ExternalLink className="w-5 h-5 mr-3" />
                                                 Live Demo
-                                            </Link>
+                                            </a>
                                         )}
                                     </div>
                                 </div>

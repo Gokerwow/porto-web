@@ -7,6 +7,22 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
     const { id } = await params;
     const project = projects.find((p) => p.id.toString() === id);
 
+    
+  const handleMouseEnter = (e: React.MouseEvent) => {
+    const rect = (e.target as Element).getBoundingClientRect();
+    setCursorState({
+      variant: 'hovering',
+      dimensions: rect
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setCursorState({
+      variant: 'default',
+      dimensions: {} as DOMRect
+    });
+  };
+
     if (!project) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50">
