@@ -31,12 +31,13 @@ export default function RootLayout({
     <html lang="en">
       <SmoothScrolling>
         <body
+          suppressHydrationWarning={true}
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <CursorProvider>
             <MouseFollower />
             <Navbar />
-            <main className=""> {/* <--- TAMBAHKAN INI */}
+            <main className="">
               {children}
             </main>
           </CursorProvider>

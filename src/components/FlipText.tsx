@@ -19,12 +19,11 @@ export default function FlipText({ children }: FlipTextProps) {
         <motion.div
             initial="initial"
             animate="animate"
-            className="absolute overflow-hidden cursor-pointer" // Ganti `absolute` menjadi `relative` agar lebih mudah di-layout
+            className="absolute overflow-hidden cursor-pointerw-screen flex flex-col justify-center items-center"
         >
             <motion.div
-                className=""
             >
-                <h1 className={`${Delirium.className} text-[840px] text-gray-300 leading-none text-center cursor-default`}>
+                <h1 className={`${Delirium.className} text-[840px] text-gray-300 leading-none text-center cursor-default whitespace-nowrap`}>
                     {children.split("").map((l, i) => {
                         return <motion.span className="inline-block" variants={{ initial: { y: 0 }, animate: { y: '-100%' } }}
                             transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.025 * i, repeat: Infinity, repeatType:"reverse", repeatDelay: 1 }} key={i}>{l}</motion.span>
@@ -32,8 +31,9 @@ export default function FlipText({ children }: FlipTextProps) {
                 </h1>
             </motion.div>
             <motion.div
+
             >
-                <h1 className={`${Delirium.className} text-[840px] text-gray-300 leading-none text-center cursor-default`}>
+                <h1 className={`${Delirium.className} text-[840px] text-gray-300 leading-none text-center cursor-default whitespace-nowrap`}>
                     {/* LANGKAH 2: Gunakan `children` di sini juga */}
                     {children.split("").map((l, i) => {
                         return <motion.span className="inline-block" variants={{ initial: { y: 0 }, animate: { y: '-100%' } }}

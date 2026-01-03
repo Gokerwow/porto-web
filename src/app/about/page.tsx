@@ -107,7 +107,7 @@ export default function AboutPage() {
                     />
                     <div className="absolute inset-0">
                         <Image
-                            src="/assets/foto_pribadi_2.png"
+                            src="/assets/foto_pribadi_2a.png"
                             alt="Description of the image"
                             width={600}
                             height={600}
