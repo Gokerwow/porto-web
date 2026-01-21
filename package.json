@@ -17,8 +17,12 @@
     "framer-motion": "^12.23.0",
     "gsap": "^3.13.0",
     "lucide-react": "^0.525.0",
+<<<<<<< HEAD
     "next": "15.3.4",
     "next-cloudinary": "^6.17.5",
+=======
+    "next": "15.3.8",
+>>>>>>> bbeeecbe8611d2d36952bbb881aab51881d766c0
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "three": "^0.178.0"
