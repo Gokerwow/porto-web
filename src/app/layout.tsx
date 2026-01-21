@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import MouseFollower from "../components/mouseEffect"
-import { CursorProvider } from "@/context/cursorContext";
-import SmoothScrolling from "@/utils/lenis";
-
-import Navbar from "../components/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,20 +24,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <SmoothScrolling>
         <body
           suppressHydrationWarning={true}
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <CursorProvider>
-            <MouseFollower />
-            <Navbar />
-            <main className="">
-              {children}
-            </main>
-          </CursorProvider>
+          <main className="">
+            {children}
+          </main>
         </body>
-      </SmoothScrolling>
     </html>
   );
 }

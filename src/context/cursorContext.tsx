@@ -9,17 +9,21 @@ export interface ICursorState {
 
 export interface ICursorContext {
     cursorState: ICursorState;
-    setCursorState: Dispatch<SetStateAction<ICursorState>>
+    setCursorState: Dispatch<SetStateAction<ICursorState>>;
+    handleMouseEnter: (e: React.MouseEvent) => void;
+    handleMouseLeave: () => void;
 }
 
-const initialState : ICursorState = {
+const initialState: ICursorState = {
     variant: 'default',
     dimensions: {},
 }
 
 export const CursorContext = createContext<ICursorContext>({
     cursorState: initialState,
-    setCursorState: () => {},
+    setCursorState: () => { },
+    handleMouseEnter: () => { },
+    handleMouseLeave: () => { },
 })
 
 interface CursorProviderProps {
@@ -29,7 +33,22 @@ interface CursorProviderProps {
 export const CursorProvider = ({ children }: CursorProviderProps) => {
     const [cursorState, setCursorState] = useState<ICursorState>(initialState)
 
-    const value = { cursorState, setCursorState }
+    const handleMouseEnter = (e: React.MouseEvent) => {
+        const rect = (e.target as Element).getBoundingClientRect();
+        setCursorState({
+            variant: 'hovering',
+            dimensions: rect
+        });
+    };
+
+    const handleMouseLeave = () => {
+        setCursorState({
+            variant: 'default',
+            dimensions: {} as DOMRect
+        });
+    };
+
+    const value = { cursorState, setCursorState, handleMouseEnter, handleMouseLeave }
 
     return (
         <CursorContext.Provider value={value}>

@@ -1,8 +1,11 @@
+"use client"
+
 import Image from "next/image"
-// 1. Impor `forwardRef` dan `ForwardedRef` dari React
 import React, { forwardRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
+import { BASE_PATH } from "@/app/constant";
+import { CldPlayer } from "./cldPlayer";
 
 interface Status {
     name: string;
@@ -20,10 +23,8 @@ interface ProjectCardProps {
     id: number;
 }
 
-// 2. Ubah deklarasi fungsi menjadi const dan bungkus dengan forwardRef
 const ProjectCard = forwardRef<HTMLAnchorElement, ProjectCardProps>(
     (props, ref) => {
-        // 3. Pindahkan destructuring props ke dalam sini
         const { title, description, media, tags, year, accent, id, status } = props;
 
         const x = useMotionValue(0.5)
@@ -56,23 +57,21 @@ const ProjectCard = forwardRef<HTMLAnchorElement, ProjectCardProps>(
         }
 
         return (
-            <Link ref={ref} href={`/projects/${id}`} className="group relative block w-full h-full drop-shadow-2xl">
+            <Link ref={ref} href={`${BASE_PATH}/projects/${id}`} className="group relative block w-full h-full drop-shadow-2xl">
                 <motion.div onMouseLeave={HandleMouseLeave} onMouseMove={HandleMouseMove} className="w-full h-[500px] bg-gray-300 inset-0 rounded-lg shadow-xl relative group transform-3d cursor-pointer " style={{ rotateX, rotateY }} >
                     <div className="absolute inset-4 rounded-xl bg-white shadow-lg transform-3d translate-z-[75px]">
                         <div className="relative aspect-video transform-3d">
-                            {media.endsWith('.mp4') ? (
-                                <video
-                                    autoPlay loop muted playsInline
-                                    className="w-full h-full object-cover opacity-90 rounded-t-lg group-hover:opacity-100 transition-opacity duration-200"
-                                >
-                                    <source src={`${media}`} type="video/mp4" />
-                                </video>
+                            {!media.endsWith('.png') ? (
+                                <CldPlayer media={media} type="card"/>
                             ) : (
                                 <Image
                                     src={media}
                                     alt={title}
                                     fill
-                                    className="w-full h-full object-cover opacity-90 rounded-t-lg group-hover:opacity-100 transition-opacity duration-200"
+                                    draggable={false}
+                                    onDragStart={(e) => e.preventDefault()}
+                                    onContextMenu={(e) => e.preventDefault()}
+                                    className="w-full h-full object-cover opacity-90 rounded-t-lg group-hover:opacity-100 transition-opacity duration-200 select-none pointer-events-none"
                                 />
                             )}
                             <div className={`absolute w-full object-cover bg-gradient-to-t from-white/80 via-white/30 to-transparent`}></div>

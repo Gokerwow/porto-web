@@ -8,6 +8,7 @@ import type { SVGProps } from 'react';
 import { CursorContext } from "@/context/cursorContext";
 import { useContext } from "react";
 import { motion } from 'framer-motion';
+import { BASE_PATH } from '@/app/constant';
 
 // --- DEFINISI KOMPONEN IKON SVG ---
 const HomeIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -59,17 +60,19 @@ export default function Navbar() {
 
     // Sekarang kita menyimpan komponen, bukan string
     const navLinks = [
-        { href: "/", icon: <HomeIcon />, label: "Home" },
-        { href: "/projects", icon: <ProjectsIcon />, label: "Projects" },
-        { href: "/about", icon: <IdCardIcon />, label: "About" }
+        { href: `${BASE_PATH}`, icon: <HomeIcon />, label: "Home" },
+        { href: `${BASE_PATH}/projects`, icon: <ProjectsIcon />, label: "Projects" },
+        { href: `${BASE_PATH}/about`, icon: <IdCardIcon />, label: "About" }
     ];
 
     return (
-        <motion.div initial={{ y:100, opacity:0 }} animate={{ y:0, opacity:1 }} transition={{ type:"tween", ease:'backOut', delay:1, duration:2 }} className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+        <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ type: "tween", ease: 'backOut', delay: 1, duration: 2 }} className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
             <div className="flex items-center gap-2 bg-[#282a3693] p-2 rounded-xl shadow-lg">
                 <nav className="flex justify-center items-center gap-2 relative">
                     {navLinks.map((link) => {
-                        const isActive = pathname === link.href;
+                        const isActive = link.href === BASE_PATH
+                            ? pathname === link.href
+                            : pathname.startsWith(link.href);
                         return (
                             // 1. Tambahkan `relative` dan `group` pada kontainer utama setiap link
                             <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key={link.href} className="relative flex flex-col items-center group">
